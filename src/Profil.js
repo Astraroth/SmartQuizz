@@ -32,6 +32,9 @@ const ProfilQuizz = ({ match, location }) => {
               </div>
 
               <div className={classes.ecriture}>
+                  CLASSE
+              </div>
+              <div className={classes.ecriture}>
                   PRENOM
               </div>
 
