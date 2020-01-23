@@ -19,9 +19,7 @@ const ProfilQuizz = ({ match, location }) => {
     return(
 
       <div className="app">
-            <header className="app-header">
-              
-              
+            <header className="app-header">           
 
              <div className={classes.ecriture}>
                   USERNAME
@@ -34,6 +32,7 @@ const ProfilQuizz = ({ match, location }) => {
               <div className={classes.ecriture}>
                   CLASSE
               </div>
+              
               <div className={classes.ecriture}>
                   PRENOM
               </div>

@@ -1,19 +1,24 @@
 import React, { Component} from 'react'
 import './App.css'
 import ToolbarQuizz from './Toolbar'
+import { makeStyles } from '@material-ui/core/styles'
 
 
-class Main extends Component {
+
+
+
+class HomeProf extends Component {
 
   render() {
     return ( 
 
     	<div className="app">
-	        <ToolbarQuizz/>   
+	          HomeProf
 	     </div> 
+
     )  
   }
 }
 
 
-export default Main2;
+export default HomeProf;

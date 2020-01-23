@@ -14,9 +14,13 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 import Menu from '@material-ui/core/Menu';
 
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
 
 import logo from './logo.png';
 import avatar from './avatar.png';
+import { NavLink } from 'react-router-dom'
+
 
 //import './Toolbar.css'
 import './App.css'
@@ -53,10 +57,11 @@ const useStyles = makeStyles(theme => ({
     color: 'black',
     fontWeight: 'bold',
     height: 60,
+    width : 150,
     padding: '0 50px',
 
     position: 'absolute',
-    top: 5, left: 1320, right: 0, bottom: 0,
+    top: 5, left: 1300, right: 0, bottom: 0,
 
     transition: "0.5s cubic-bezier(.47,1.64,.41,.8)",
     "&:hover": {
@@ -151,6 +156,13 @@ const ToolbarQuizz = ({ match, location }) => {
     setAnchorEl(null);
   };
 
+  const handleTypeChange = event => {
+    setType(event.target.value);
+  };
+
+  
+  const [type, setType] = React.useState("");
+
   return(
 
     <Router>
@@ -163,7 +175,7 @@ const ToolbarQuizz = ({ match, location }) => {
                    style={{width: 110, height: 60, marginTop: 10}} 
                    alt="Logo"/>
 
-              <Link to="/">
+              <Link to="/Home">
                 <Button className={classes.home} 
                         shape="chubby" 
                         variant="contained" 
@@ -195,9 +207,33 @@ const ToolbarQuizz = ({ match, location }) => {
                 {/*menu deroulant profil + deconnexion*/}
                <Button className={classes.profil} 
                       onClick={handleClick}>
-                  Profil
-              </Button>
-              <Menu id="simple-menu"
+                 
+             
+              <InputLabel htmlFor="type">Profil</InputLabel>
+              <Select
+
+                    value={type}
+                    onChange={handleTypeChange}
+                    inputProps={{
+                      name: 'type',
+                      id: 'type',
+                    }}
+                  >
+                    <MenuItem  containerElement={<Link to="/ProfilQuizz" />} onClose={handleClose} value="Mon Profil">
+                      <NavLink to="/Profil">  Mon Profil </NavLink>
+                    </MenuItem>
+                    <MenuItem onClick={handleClose} value="Déconnexion">
+                      <NavLink to="/Deconnexion">Déconnexion</NavLink>
+                    </MenuItem>
+                   
+                  </Select>
+
+                   </Button>
+
+                   
+
+
+              {/*<Menu id="simple-menu"
                     anchorEl={anchorEl}
                     keepMounted
                     open={Boolean(anchorEl)}
@@ -210,41 +246,44 @@ const ToolbarQuizz = ({ match, location }) => {
                 <Link to="/Deconnexion">
                   <MenuItem onClick={handleClose}>Déconnexion</MenuItem>
                 </Link>
-              </Menu>
+              </Menu>*/}
+
+
+
+
+
 
             </Toolbar>
           </AppBar>
 
+               <Route path="/Home" component={HomeQuizz}/>
 
-            
-            <Route  exact path="/" component={HomeQuizz}/>
-
-          
-             
-            <Route  path="/Stats" component={StatsQuizz}/>
+               
+              <Route  path="/Stats" component={StatsQuizz}/>
+                
+              <Route  path="/EnCours" component={()=> <EnCoursQuizz online = {true}/>} />
               
-            <Route  path="/EnCours" component={()=> <EnCoursQuizz online = {true}/>} />
-            
-            <Route  path="/Rejoindre" component={CreationQuizz}/>
+              <Route  path="/Rejoindre" component={CreationQuizz}/>
 
-            <Route  path="/Profil" component={ProfilQuizz}/>
+              <Route  path="/Profil" component={ProfilQuizz}/>
 
-            <Route  path="/Deconnexion" component={Deconnexion}/>
+              <Route  path="/Deconnexion" component={Deconnexion}/>
 
-            <Route  path="/Creation" component={CreationQuizz}/>
+              <Route  path="/Creation" component={CreationQuizz}/>
 
 
-            <Route  path="/robert" component={CreaQuizz}/>            
+              <Route  path="/robert" component={CreaQuizz}/>            
 
-            {/*<Route   path="/Classes/:numero" component={()=> <ClassesQuizz numero = "32"/>}/> */}
+              {/*<Route   path="/Classes/:numero" component={()=> <ClassesQuizz numero = "32"/>}/> */}
 
-            <Route  exact path="/Classes/31" component={Classe31Quizz}/>
+              <Route  exact path="/Classes/31" component={Classe31Quizz}/>
 
-            <Route  exact path="/Classes/32" component={Classe32Quizz}/>
+              <Route  exact path="/Classes/32" component={Classe32Quizz}/>
 
-            <Route  exact path="/Classes/33" component={Classe33Quizz}/>
+              <Route  exact path="/Classes/33" component={Classe33Quizz}/>
 
-            <Route  exact path="/Classes/34" component={Classe34Quizz}/>
+              <Route  exact path="/Classes/34" component={Classe34Quizz}/>
+           
       
 
         </header>  

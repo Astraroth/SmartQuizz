@@ -94,8 +94,6 @@ const HomeQuizz = ({ match, location }) => {
     question2: '' 
   });
 
-
-
   var klasse = [
 
     {id: 1, classe: 31},
@@ -146,17 +144,7 @@ const HomeQuizz = ({ match, location }) => {
                   <p>Créer un quizz {/*{info.question1}*/}</p>
                 </Button> 
               </Link>
-              
-              
-
-              {/* <Link to="Classe1">
-                <Button className={classes.klasse} 
-                        shape="chubby" 
-                        variant="contained" 
-                        color="primary"> 
-                  <p>Classe 1</p>
-                </Button> 
-              </Link>     */}
+           
 
               <p className={classes.blanc}/>
 
