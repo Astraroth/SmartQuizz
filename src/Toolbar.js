@@ -215,36 +215,34 @@ const ToolbarQuizz = ({ match, location }) => {
             </Toolbar>
           </AppBar>
 
+               <Route  exact path="/" component={HomeQuizz}/>
 
-            
-            <Route  exact path="/" component={HomeQuizz}/>
-
-          
-             
-            <Route  path="/Stats" component={StatsQuizz}/>
+               
+              <Route  path="/Stats" component={StatsQuizz}/>
+                
+              <Route  path="/EnCours" component={()=> <EnCoursQuizz online = {true}/>} />
               
-            <Route  path="/EnCours" component={()=> <EnCoursQuizz online = {true}/>} />
-            
-            <Route  path="/Rejoindre" component={CreationQuizz}/>
+              <Route  path="/Rejoindre" component={CreationQuizz}/>
 
-            <Route  path="/Profil" component={ProfilQuizz}/>
+              <Route  path="/Profil" component={ProfilQuizz}/>
 
-            <Route  path="/Deconnexion" component={Deconnexion}/>
+              <Route  path="/Deconnexion" component={Deconnexion}/>
 
-            <Route  path="/Creation" component={CreationQuizz}/>
+              <Route  path="/Creation" component={CreationQuizz}/>
 
 
-            <Route  path="/robert" component={CreaQuizz}/>            
+              <Route  path="/robert" component={CreaQuizz}/>            
 
-            {/*<Route   path="/Classes/:numero" component={()=> <ClassesQuizz numero = "32"/>}/> */}
+              {/*<Route   path="/Classes/:numero" component={()=> <ClassesQuizz numero = "32"/>}/> */}
 
-            <Route  exact path="/Classes/31" component={Classe31Quizz}/>
+              <Route  exact path="/Classes/31" component={Classe31Quizz}/>
 
-            <Route  exact path="/Classes/32" component={Classe32Quizz}/>
+              <Route  exact path="/Classes/32" component={Classe32Quizz}/>
 
-            <Route  exact path="/Classes/33" component={Classe33Quizz}/>
+              <Route  exact path="/Classes/33" component={Classe33Quizz}/>
 
-            <Route  exact path="/Classes/34" component={Classe34Quizz}/>
+              <Route  exact path="/Classes/34" component={Classe34Quizz}/>
+           
       
 
         </header>  
