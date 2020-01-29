@@ -206,7 +206,7 @@ const QcmPage = ({ match, location }) => {
 
   function doGetTEXT()  {
 
-    var url = "http://10.8.95.34:8000/api/Quiz/";
+    var url = "http://192.168.0.23:8000/api/Quiz/";
 
     
 

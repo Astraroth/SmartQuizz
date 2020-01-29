@@ -8,6 +8,11 @@ import {
   Route,
 
 } from "react-router-dom";
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 
 const useStyles = makeStyles(theme => ({
@@ -86,7 +91,37 @@ const useStyles = makeStyles(theme => ({
 
 
 const HomeQuizz = ({ match, location }) => {
-   
+
+  const [data_back, setData] = React.useState([]);
+  
+  React.useEffect(() => {
+      var url = "http://192.168.0.23:8000/api/Quiz/"; 
+      var aPromise = fetch(url);
+      aPromise
+        .then(function(response){
+          console.log("OK !");
+          return response.json();
+        })
+        .then(async function(data) {
+          let temp = [];
+
+          data.forEach(element => temp.push(element))
+          setData(temp)
+          //console.log(data)
+        })
+        .catch(function(error){
+          console.log("Error");
+          console.log(error);
+        });
+    
+        
+  }, []); //call only once with this methode
+  
+  const [data_simple, setSimple] = React.useState([]);
+  const [openSimple, setOpenSimple] = React.useState(false);
+  
+  
+  
   const classes = useStyles();
 
   const [info, ChangeInfo] = React.useState({
@@ -94,6 +129,14 @@ const HomeQuizz = ({ match, location }) => {
     question2: '' 
   });
 
+  const handleClickOpen = (e) => {
+    setOpenSimple(true);
+    setSimple(data_back.find(element => element.id === e))
+  };
+
+  const handleClose = () => {
+    setOpenSimple(false);
+  };
 
 
   var klasse = [
@@ -104,10 +147,77 @@ const HomeQuizz = ({ match, location }) => {
     {id: 4, classe: 34},
   ];
 
+  function at(){
+    ///recupere les données des question
+  }
 
+  function questionSimpleData(){///render les questions
+
+    //appelle at ici, pense a changer de nom
+    return <p>attttt</p>
+  }
+
+
+  function simpleData(){////ajouter 
+    
+    if(typeof(data_simple) !== 'undefined' && data_simple.size !== 0)
+    console.log(data_simple.questions);
+      return (
+      <Dialog open={openSimple} onClose={handleClose} aria-labelledby="form-dialog-title">
+        <DialogTitle id="form-dialog-title">{data_simple.title}</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+          {questionSimpleData()}
+          </DialogContentText>
+          
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleClose} color="primary">
+            Ok
+          </Button>
+        </DialogActions>
+      </Dialog>
+      );
+      
+  }
+
+  function renderQuestion()///en veriter render le quizz
+  {
+    //showTitle();
+    if(typeof(data_back) !== 'undefined' && data_back.size!== 0)
+    {
+      console.log("Ici")
+      console.log(data_back)
+      return( data_back.map((element , index) =>
+      <tr key={index}>
+        <td> 
+        <Button className={classes.klasse} 
+          shape="chubby" 
+          variant="contained" 
+          color="primary"
+          value_id={element.id}
+          onClick={() => handleClickOpen(element.id)}
+          >
+
+          <p>{element.title}</p>
+        </Button>
+        </td>                      
+      </tr>
+      
+      )) 
+    } 
+
+    return <p>Rien</p>
+  }
+
+  
+//???
  function doGetTEXT(){
 
-  var url = "http://10.8.94.137:8000/api/QCM/";
+  var url = "http://192.168.0.23:8000/api/QCM/";
 
   var aPromise = fetch(url);
 
@@ -159,8 +269,7 @@ const HomeQuizz = ({ match, location }) => {
               </Link>     */}
 
               <p className={classes.blanc}/>
-
-              <table>
+              {/* <table>
                 <tbody>
                   {klasse.map(({ id, classe}) => (                      
                     <tr key={id}>
@@ -177,13 +286,36 @@ const HomeQuizz = ({ match, location }) => {
                     </tr>
                   ))}
                 </tbody>
+              </table> */}
+              
+{/* pour retirer la liste des classes */}
+              
+              <table>
+                <tbody>
+                {renderQuestion()}
+                  {/* {klasse.map(({ id, classe}) => (                      
+                    <tr key={id}>
+                      <td> 
+                        <Link to={`/Classes/${classe}`}>
+                          <Button className={classes.klasse} 
+                                  shape="chubby" 
+                                  variant="contained" 
+                                  color="primary"> 
+                            <p>Classe {classe}</p>
+                          </Button> 
+                        </Link> 
+                      </td>                      
+                    </tr>
+                  ))} */}
+                </tbody>
               </table>
 
              {/*} {buttons}*/}
               
 
-            </header>  
-        </div>  
+            </header>
+            {simpleData()}  
+      </div>  
     );
 }
 
